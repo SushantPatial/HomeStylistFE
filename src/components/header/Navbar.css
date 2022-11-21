@@ -18,8 +18,7 @@ nav .logo {
   padding: 3px;
 }
 nav .logo img {
-  margin-top: 10px;
-  width: 100px;
+  width: 150px;
 }
 nav .logo:hover {
   outline: 1px solid white;
