@@ -29,7 +29,7 @@ const Navbar = () => {
         try {
           let token = localStorage.getItem('HomeStylist');
           console.log(token);
-          const res = await axios.get("https://home-stylist-be.vercel.app/api/getAuthUser", { 
+          const res = await axios.post("https://home-stylist-be.vercel.app/api/getAuthUser", { 
             HomeStylist: token
           }, {
             withCredentials: true
