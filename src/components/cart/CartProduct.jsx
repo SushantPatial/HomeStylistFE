@@ -14,8 +14,9 @@ const CartProduct = (props) => {
 
     async function deleteFromCart() {
       try {
-        const res = await axios.delete("https://home-stylist-be.vercel.app/api/delete/" + product.id, {
-          withCredentials: true
+        let token = localStorage.getItem('HomeStylist');
+        const res = await axios.post("https://home-stylist-be.vercel.app/api/delete/" + product.id, {
+          HomeStylist: token
         })
         if (res.data.message == "Item deleted successfully") {
           window.location.reload(false);

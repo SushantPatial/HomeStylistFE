@@ -28,11 +28,8 @@ const Navbar = () => {
       async function fetchUser() {
         try {
           let token = localStorage.getItem('HomeStylist');
-          console.log(token);
           const res = await axios.post("https://home-stylist-be.vercel.app/api/getAuthUser", { 
             HomeStylist: token
-          }, {
-            withCredentials: true
           });
   
           if (res) {
@@ -79,8 +76,9 @@ const Navbar = () => {
     // Logout 
       function logout() {
         try {
-          const res = axios.get("https://home-stylist-be.vercel.app/api/logout", {
-            withCredentials: true
+          let token = localStorage.getItem('HomeStylist');
+          const res = axios.post("https://home-stylist-be.vercel.app/api/logout", {
+            HomeStylist: token
           })
 
           if (res) {

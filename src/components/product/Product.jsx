@@ -36,13 +36,14 @@ const Product = () => {
   // Add to cart
   async function addToCart(id) {
     try {
+      let token = localStorage.getItem('HomeStylist');
       const res = await axios.post('https://home-stylist-be.vercel.app/api/addtocart/' + id, {
-        product
+        product,
+        HomeStylist: token
       }, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        withCredentials: true
+        }
       });
       
     } catch (error) {
@@ -55,7 +56,10 @@ const Product = () => {
   const [userData, setUserData] = useState();
   async function fetchUser() {
     try {
-      const res = await axios.get('https://home-stylist-be.vercel.app/api/getAuthUser', {withCredentials: true});
+      let token = localStorage.getItem('HomeStylist');
+      const res = await axios.post('https://home-stylist-be.vercel.app/api/getAuthUser', {
+        HomeStylist: token
+      });
       if (res) {
         setUserData(res.data);
       }
@@ -91,10 +95,10 @@ const Product = () => {
             img: product.img
           }
 
+          let token = localStorage.getItem('HomeStylist');
           const res = await axios.post("https://home-stylist-be.vercel.app/api/create-order", {
-            amount: orderAmount + '00'
-          }, {
-            withCredentials: true
+            amount: orderAmount + '00',
+            HomeStylist: token
           })
           
           const { id, amount, currency } = res.data.order;
@@ -116,9 +120,8 @@ const Product = () => {
                 amount: amount,
                 razorpayPaymentId: response.razorpay_payment_id,
                 razorpayOrderId: response.razorpay_order_id,
-                razorpaySignature: response.razorpay_signature
-              }, {
-                withCredentials: true
+                razorpaySignature: response.razorpay_signature,
+                HomeStylist: token
               })
               navigate("/orders");
             },

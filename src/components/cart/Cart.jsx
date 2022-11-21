@@ -18,19 +18,22 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('https://home-stylist-be.vercel.app/api/getAuthUser', {withCredentials: true})
-        .then(function(res) {
-          setUserData(res.data);
-          setCartArr(res.data.cart);
-          setIsLoading(false);
-        })
-        .catch(function(error) {
-          if (error.response.data.message == "No token provided") {
-            navigate('/login');
-          } else {
-            console.log(error);
-          }
-        });
+    let token = localStorage.getItem('HomeStylist');
+    axios.post("https://home-stylist-be.vercel.app/api/getAuthUser", { 
+      HomeStylist: token
+    })
+    .then(function(res) {
+      setUserData(res.data);
+      setCartArr(res.data.cart);
+      setIsLoading(false);
+    })
+    .catch(function(error) {
+      if (error.response.data.message == "No token provided") {
+        navigate('/login');
+      } else {
+        console.log(error);
+      }
+    });
   }, [])
 
   // Creating an array of products ordered
@@ -61,10 +64,10 @@ const Cart = () => {
     };
     script.onload = async () => {
       try {
+        let token = localStorage.getItem('HomeStylist');
         const res = await axios.post("https://home-stylist-be.vercel.app/api/create-order", {
-          amount: orderAmount + '00'
-        }, {
-          withCredentials: true
+          amount: orderAmount + '00',
+          HomeStylist: token
         })
         
         const { id, amount, currency } = res.data.order;
@@ -86,10 +89,10 @@ const Cart = () => {
               amount: amount,
               razorpayPaymentId: response.razorpay_payment_id,
               razorpayOrderId: response.razorpay_order_id,
-              razorpaySignature: response.razorpay_signature
-            }, {
-              withCredentials: true
+              razorpaySignature: response.razorpay_signature,
+              HomeStylist: token
             })
+            
             navigate("/orders");
           },
           prefill: {

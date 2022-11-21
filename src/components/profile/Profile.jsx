@@ -16,8 +16,9 @@ const Profile = () => {
   useEffect(function() {
     async function fetchUser() {
       try {
-        const res = await axios.get("https://home-stylist-be.vercel.app/api/getAuthUser", {
-          withCredentials: true
+        let token = localStorage.getItem('HomeStylist');
+        const res = await axios.post("https://home-stylist-be.vercel.app/api/getAuthUser", {
+          HomeStylist: token
         })
   
         if (res) {
