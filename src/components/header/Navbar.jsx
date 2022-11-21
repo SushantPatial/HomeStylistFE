@@ -27,8 +27,10 @@ const Navbar = () => {
       // Fetching user data
       async function fetchUser() {
         try {
+          let token = localStorage.getItem('HomeStylist');
+          console.log(token);
           const res = await axios.get("https://home-stylist-be.vercel.app/api/getAuthUser", { 
-            HomeStylist: localStorage.getItem('HomeStylist')
+            HomeStylist: token
           }, {
             withCredentials: true
           });
