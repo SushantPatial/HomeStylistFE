@@ -82,12 +82,14 @@ const Navbar = () => {
           })
 
           if (res) {
-            navigate("/");
+            localStorage.removeItem('HomeStylist');
           
             setLoginMsg("Sign in");
             setCartValue("0");
             setProfilePhoto(<NavLink to="/login" className='profile'><PersonIcon id="profile-icon" /></NavLink>);
             setLoggedIn("false");
+
+            navigate("/");
             // window.location.reload();
           }
         } catch (error) {
