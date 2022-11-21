@@ -1,43 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './profile.css';
 
 const OrderTop = (props) => {
   let order = props.order;
-  let date = order.date;
+  let [fullDate, setFullDate] = useState("");
+  let [orderAmount, setOrderAmount] = useState("");
+  
+  useEffect(() => {
+    let order = props.order;
+    let date = order.date;
 
-  let monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  let slash = 0;
-  let start = 0;
-  let monthStr = '';
-  let day = '';
-  let year = ''
+    let monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-  for (let i = 0; i < date.length; i++) {
-    if (date[i] === '/') {
-      if (slash === 0) {
-        day = date.substring(start, i);
-        start = i + 1;
-        slash++;
-      } else if (slash === 1) {
-        monthStr = date.substring(start, i);
-        start = i + 1;
-        slash++;
-      }
-    } else if (slash === 2) {
-      year = date.substring(start, date.length);
-    }
-  }
+    const [day, month, year] = date.split('/');
+    let newDate = day + " " + monthArr[month - 1] + " " + year;
 
-  let month = monthArr[parseInt(start) + 1];
-  let fullDate = day + " " + month + " " + year;
+    setFullDate(newDate);
 
-  let amount = order.amount.toString();  
-  amount = amount.substring(0, amount.length - 2);
-  let lastThree = amount.substring(amount.length-3);
-  let otherNumbers = amount.substring(0,amount.length-3);
-  if(otherNumbers != '')
-    lastThree = ',' + lastThree;
-  amount = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    let amount = order.amount.toString();  
+    amount = amount.substring(0, amount.length - 2);
+    let lastThree = amount.substring(amount.length-3);
+    let otherNumbers = amount.substring(0,amount.length-3);
+    if(otherNumbers != '')
+      lastThree = ',' + lastThree;
+    amount = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+
+    setOrderAmount(amount);
+  }, [])
+  
 
   return (
     <div>
@@ -48,7 +38,7 @@ const OrderTop = (props) => {
         </div>
         <div className='col-6 col-md-3 col-lg-2'>
           <h6 className='order-top-details'>Total</h6>
-          <p>{ "₹" + amount + ".00" }</p>
+          <p>{ "₹" + orderAmount + ".00" }</p>
         </div>
         <div className='col-12 col-md-6 col-lg-8'>
           <h6 className='order-id'>{ order.razorpay.orderId }</h6>

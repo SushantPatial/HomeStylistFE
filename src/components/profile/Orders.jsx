@@ -13,6 +13,7 @@ const Orders = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState();
+  const [name, setName] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,6 +26,8 @@ const Orders = () => {
         })
   
         if (res) {
+          setName(res.data.name + "'s Account");
+          res.data.orders.reverse();
           setUserData(res.data);
           setIsLoading(false);
         }
@@ -40,22 +43,15 @@ const Orders = () => {
     fetchUser();
   }, []);
   
-  if (userData) {
-
-    const name = userData.name;
-    const fname = name.substring(0, name.indexOf(' ')) + "'s Orders";
-
-    const orders = userData.orders;
-    orders.reverse();
 
     return (
       <>
         { 
           isLoading ? <Loader /> :
           <div className='profile'>
-            <NameBanner name={fname} />
+            <NameBanner name={name} />
             <div className='order-list'>
-              { orders.map((order, index) => {
+              { userData.orders.map((order, index) => {
                 let orderItem = order.orderInfo;
                 let orderedProducts = orderItem.products;
 
@@ -81,7 +77,6 @@ const Orders = () => {
         }
       </>
     )
-  }
   
 }
 

@@ -10,11 +10,13 @@ const Profile = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState();
+  const [name, setName] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(function() {
     async function fetchUser() {
+      setIsLoading(true);
       try {
         let token = localStorage.getItem('HomeStylist');
         const res = await axios.post("https://home-stylist-be.vercel.app/api/getAuthUser", {
@@ -22,7 +24,9 @@ const Profile = () => {
         })
   
         if (res) {
+          setName(res.data.name + "'s Account");
           setUserData(res.data);
+          
           setIsLoading(false);
         }
       } catch (error) {
@@ -37,25 +41,18 @@ const Profile = () => {
     fetchUser();
   }, []);
 
-  if (userData) {
-
-    const name = userData.name;
-    const fname = name.substring(0, name.indexOf(' ')) + "'s Account";
 
     return (
       <>
         {
           isLoading ? <Loader /> :
           <div className='profile'>
-            <NameBanner name={fname} />
+            <NameBanner name={name} />
             <UserDetails user={userData} />
           </div>
         }
       </>
-    )
-  } else {
-    <Loader />
-  }
+    ) 
   
 }
 
