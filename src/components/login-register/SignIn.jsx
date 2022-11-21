@@ -53,7 +53,7 @@ const SignIn = () => {
 
       setTimeout(function() {
         navigate('/');
-      }, 1000)
+      }, 3000)
 
     } catch (error) {
       try {
