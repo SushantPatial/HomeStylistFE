@@ -1,0 +1,101 @@
+#footer {
+  color: #fff;
+  font-size: 14px;
+  background-color: var(--color-4);
+}
+#footer .footer-top {
+  padding: 60px 0 30px 0;
+  background-color: var(--color-5);
+}
+#footer .footer-top .footer-contact {
+  margin-bottom: 30px;
+}
+#footer .footer-top .footer-contact.logo {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#footer .footer-top .footer-contact.logo img {
+  width: 100px;
+}
+#footer .footer-top .footer-contact p {
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 0;
+}
+#footer .footer-top h4 {
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+}
+#footer .footer-top h4::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-1);
+  bottom: 0;
+  left: 0;
+}
+#footer .footer-top .footer-links {
+  margin-bottom: 30px;
+}
+#footer .footer-top .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: -5px;
+}
+#footer .footer-top .footer-links ul .icon {
+  color: var(--color-1);
+  font-size: 18px;
+}
+#footer .footer-top .footer-links ul li {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+#footer .footer-top .footer-links ul li:first-child {
+  padding-top: 0;
+}
+#footer .footer-top .footer-links ul a {
+  color: #fff;
+  transition: 0.3s;
+  display: inline-block;
+  line-height: 1;
+  text-decoration: none;
+}
+#footer .footer-top .footer-links ul a:hover {
+  margin-left: 3px;
+}
+#footer .social-links .social-links-wrapper {
+  display: flex;
+}
+#footer .social-links a {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: var(--color-4);
+  color: #fff;
+  padding: 8px 0;
+  margin-right: 8px;
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+}
+#footer .social-links a:hover {
+  background: var(--color-1);
+}
+#footer .footer-bottom {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
