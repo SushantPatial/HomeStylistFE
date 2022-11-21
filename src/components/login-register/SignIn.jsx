@@ -41,19 +41,23 @@ const SignIn = () => {
         withCredentials: true // Cookie credentials (tokens)
       });
 
-      setSignInInfo(function() {
-        return {
-          ...signInInfo,
-          email: "", password: ""
-        }
-      });
-
-      document.querySelector(".error-alert").style.display = "none";
-      document.querySelector(".success-alert").style.display = "flex";
-
-      setTimeout(function() {
-        navigate('/');
-      }, 3000)
+      if (res) {
+        setSignInInfo(function() {
+          return {
+            ...signInInfo,
+            email: "", password: ""
+          }
+        });
+  
+        console.log(res);
+  
+        document.querySelector(".error-alert").style.display = "none";
+        document.querySelector(".success-alert").style.display = "flex";
+  
+        setTimeout(function() {
+          navigate('/');
+        }, 5000)
+      }
 
     } catch (error) {
       try {
