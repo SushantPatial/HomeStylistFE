@@ -27,7 +27,9 @@ const Navbar = () => {
       // Fetching user data
       async function fetchUser() {
         try {
-          const res = await axios.get("https://home-stylist-be.vercel.app/api/getAuthUser", {
+          const res = await axios.get("https://home-stylist-be.vercel.app/api/getAuthUser", { 
+            HomeStylist: localStorage.getItem('HomeStylist')
+          }, {
             withCredentials: true
           });
   
