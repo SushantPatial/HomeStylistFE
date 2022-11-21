@@ -49,14 +49,12 @@ const SignIn = () => {
           }
         });
   
-        console.log(res);
+        localStorage.setItem("HomeStylist", res.data.cookie)
   
         document.querySelector(".error-alert").style.display = "none";
         document.querySelector(".success-alert").style.display = "flex";
   
-        setTimeout(function() {
-          navigate('/');
-        }, 5000)
+        navigate('/');
       }
 
     } catch (error) {
